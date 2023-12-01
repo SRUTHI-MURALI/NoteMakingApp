@@ -93,6 +93,14 @@ export const userLogin = (email, password) => {
   return axios.post(`${Base_Url}/user/login`, { email, password });
 };
 
+export const addNotes = (title,summary,content,files,userId) => {
+  return api.post(`/addNotes`, {title,summary,content,files,userId });
+};
+
+export const getNotes= (id)=>{
+  return api.get(`/getNotes/${id}`)
+}
+
 
 
 export default api;

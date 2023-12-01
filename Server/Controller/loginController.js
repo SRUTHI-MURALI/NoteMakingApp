@@ -46,6 +46,7 @@ console.log(req.body);
   }
 };
 
+
 /**************************** User Register Verify Otp *************************************/
 
 const userRegisterVerifyOtp = async (req, res) => {
