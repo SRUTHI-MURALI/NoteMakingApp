@@ -192,4 +192,22 @@ const userUntagNote = async (req, res) => {
     }
   };
 
-export { userAddNotes, userGetNotes, handleSearch ,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote,userGetEditNotes};
+  /**************************** User get Tagged Notes Page *************************************/
+
+const userTaggedNotesPage = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const notesFind =await noteSchema.find({ author: id, tagged: true });
+console.log(notesFind,'kkkk');
+    if (notesFind) {
+      res.status(200).json({ notesFind });
+    } else {
+      res.status(500).json({ message: "no notes to display" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export { userAddNotes, userGetNotes, handleSearch ,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote,userGetEditNotes,userTaggedNotesPage};

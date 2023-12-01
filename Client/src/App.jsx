@@ -7,6 +7,7 @@ import Login from './Pages/Login.jsx';
 import Home from './Pages/Home.jsx';
 import AddNotes from './Pages/AddNotes.jsx';
 import EditNotes from './Pages/EditNotes.jsx';
+import TaggedNotes from './Pages/TaggedNotes.jsx';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path="/homePage" element={<Home/>}/>
       <Route path="/addNotes" element={<AddNotes/>}/>
       <Route path="/editNote/:id" element={<EditNotes/>}/>
+      <Route path="/tagsPage" element={<TaggedNotes/>}/>
         
       </Routes>
     </Router>

@@ -3,7 +3,7 @@ const userRouter= express.Router()
 
 import { userLoggedIn } from '../MiddleWare/userAuth.js'
 import { userRegisterSendOtp,userRegisterVerifyOtp,userLogin } from '../Controller/loginController.js'
-import {handleSearch, userAddNotes,userGetNotes,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote,userGetEditNotes} from '../Controller/noteMakingController.js'
+import {handleSearch, userAddNotes,userGetNotes,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote,userGetEditNotes,userTaggedNotesPage} from '../Controller/noteMakingController.js'
 
 
 /**************************** User Register  *************************************/
@@ -29,6 +29,9 @@ userRouter.put("/tagNote/:id",userLoggedIn, usertagNote);
 
 /**************************** User UnTag note   *************************************/
 userRouter.put("/untagNote/:id",userLoggedIn, userUntagNote);
+
+/**************************** User tagged notes page   *************************************/
+userRouter.get("/getTaggedNotes/:id",userLoggedIn, userTaggedNotesPage);
 
 
 

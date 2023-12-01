@@ -73,10 +73,15 @@ export const editNote= (title,summary,content,id)=>{
   })
 }
 
+
+
 export const deleteNote= (id)=>{
   return api.delete(`/deleteNote/${id}`)
 }
 
+export const getTaggedNotes= (id)=>{
+  return api.get(`/getTaggedNotes/${id}`)
+}
 
 
 export default api;

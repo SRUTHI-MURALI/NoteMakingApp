@@ -5,15 +5,25 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/UserSlice";
+import image from "../../assets/images (1).jpeg"
+import home from "../../assets/home.png"
 
 import "./Home.css";
 
-function Header() {
+function Header({page}) {
   const userData = localStorage.getItem("userData");
   const parseData = userData ? JSON.parse(userData) : null;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleTags= async ()=>{
+    navigate('/tagsPage')
+  }
+
+  const handleHome= async ()=>{
+    navigate('/homePage')
+  }
 
   const handleLogout = async () => {
     localStorage.removeItem("userData");
@@ -41,8 +51,23 @@ function Header() {
       Welcome {parseData?.name}{" "}
     </h1>
   </div>
+  {page !== "tags" ? (
+  <div>
+    <Button variant="none" onClick={handleTags}>
+      <img style={{ height: "4rem", width: "4rem" }} src={image} alt="Tag Icon" />
+    </Button>
+  </div>
+) : (  <div>
+  <Button variant="none" onClick={handleHome}>
+    <img style={{ height: "4rem", width: "4rem" }} src={home} alt="Tag Icon" />
+  </Button>
+</div>)
+  
+}
+ 
   <div className="ms-auto">
-    <Link to="" onClick={handleLogout}>
+    
+    <Link  onClick={handleLogout}>
       <Button className="m-3">Logout</Button>
     </Link>
   </div>

@@ -12,7 +12,7 @@ import { FaBackward } from "react-icons/fa";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import {MdOutlineStarOutline} from "react-icons/md"
 import { MdOutlineStarPurple500} from 'react-icons/md'
-import {RxCross2} from 'react-icons/rx'
+import { MdDelete} from 'react-icons/md'
 import {FaEdit} from 'react-icons/fa'
 
 
@@ -83,7 +83,7 @@ function Body() {
   useEffect(()=>{
     try {
       setAllNotes(searchedNote)
-      console.log(allNotes,'ghhjk');
+      
     } catch (error) {
       toast.error("Error fetching notes");
     }
@@ -173,7 +173,7 @@ function Body() {
                       <Button variant="none" onClick={()=>handleTag(notes?._id)} > <MdOutlineStarOutline/></Button>
                     )}
               
-              <Button variant="none" onClick={()=>handleDelete(notes?._id)} > <RxCross2/></Button>
+              <Button variant="none" onClick={()=>handleDelete(notes?._id)} > <MdDelete/></Button>
                    </Col>
                  
 
@@ -198,7 +198,6 @@ function Body() {
       </Container>
     </>
 
-    // </Container>
   );
 }
 
