@@ -1,10 +1,16 @@
 import React from 'react'
+import Header from '../Components/UserHome/Header'
+import { Container } from 'react-bootstrap'
+import Body from '../Components/UserHome/Body'
 
 function Home() {
   return (
-    <div>
-      <h1>khhgkjgk</h1>
-    </div>
+   
+     <Container>
+      <Header/>
+      <Body/>
+     </Container>
+  
   )
 }
 
