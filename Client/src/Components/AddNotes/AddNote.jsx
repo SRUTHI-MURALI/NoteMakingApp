@@ -174,6 +174,7 @@ function AddNote() {
           </form>
         </Col>
       </Row>
+      
     </Container>
   );
 }
