@@ -155,9 +155,9 @@ function RegisterForm() {
                 </Button>
               </div>
             </Form>
-            {/* <h6 className="mt-5" style={{ textAlign: "right" }}>
+            <h6 className="mt-5" style={{ textAlign: "right" }}>
               Have you already registered? <Link to="/login">Login</Link>
-            </h6> */}
+            </h6>
           </Col>
         </Row>
       </Card>

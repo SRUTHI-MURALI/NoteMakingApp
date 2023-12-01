@@ -6,6 +6,8 @@ import OtpVerify from './Pages/OtpVerify.jsx';
 import Login from './Pages/Login.jsx';
 import Home from './Pages/Home.jsx';
 import AddNotes from './Pages/AddNotes.jsx';
+import EditNotes from './Pages/EditNotes.jsx';
+
 
 function App() {
   
@@ -23,6 +25,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/homePage" element={<Home/>}/>
       <Route path="/addNotes" element={<AddNotes/>}/>
+      <Route path="/editNote/:id" element={<EditNotes/>}/>
         
       </Routes>
     </Router>

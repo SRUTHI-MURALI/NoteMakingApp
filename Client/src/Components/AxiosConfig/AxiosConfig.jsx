@@ -109,6 +109,16 @@ export const untagNote= (id)=>{
   return api.put(`/untagNote/${id}`)
 }
 
+export const getEditData= (id)=>{
+  return api.get(`/getEditData/${id}`)
+}
+
+export const editNote= (title,summary,content,id)=>{
+  return api.put(`/editNote/${id}`,{
+    title,summary,content
+  })
+}
+
 export const deleteNote= (id)=>{
   return api.delete(`/deleteNote/${id}`)
 }

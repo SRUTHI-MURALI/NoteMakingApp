@@ -13,6 +13,8 @@ import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import {MdOutlineStarOutline} from "react-icons/md"
 import { MdOutlineStarPurple500} from 'react-icons/md'
 import {RxCross2} from 'react-icons/rx'
+import {FaEdit} from 'react-icons/fa'
+import EditNotes from "../../Pages/EditNotes";
 
 function Body() {
  
@@ -47,6 +49,14 @@ function Body() {
     }
   }
 
+  const handleEdit= async(id)=>{
+    try {
+     navigate(`/editNote/${id}`)
+      
+    } catch (error) {
+      toast.error("Error editing notes");
+    }
+  }
 
   const handleDelete= async (id)=>{
     try {
@@ -149,6 +159,7 @@ function Body() {
                     </p>
                   </Col>
                   <Col xs={2} className="mt-2">
+                  <Button variant="none" onClick={()=>handleEdit(notes?._id)} > <FaEdit/></Button>
                     {notes?.tagged ? (
                       <Button variant="none" onClick={()=>handleUnTag(notes?._id)} > <MdOutlineStarPurple500/></Button>
                     ):(

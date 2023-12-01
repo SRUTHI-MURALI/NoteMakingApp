@@ -4,13 +4,12 @@ import noteSchema from "../Model/notesModel.js";
 /**************************** User Add Notes *************************************/
 const userAddNotes = async (req, res) => {
   try {
-    const { title, summary, photo, file, content, image, userId } = req.body;
+    const { title, summary, file, content, image, userId } = req.body;
     const user = await userSchema.findById(userId);
     if (user) {
       const newNote = await noteSchema({
         title,
         summary,
-        photo,
         file,
         content,
         image,
@@ -50,24 +49,42 @@ const userGetNotes = async (req, res) => {
   }
 };
 
+/**************************** User get edit Notes *************************************/
+
+const userGetEditNotes = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const notesFind = await noteSchema.find({ _id: id });
+  
+      if (notesFind) {
+        res.status(200).json({ notesFind });
+      } else {
+        res.status(500).json({ message: "no notes to display" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+
 
 /**************************** User Update Notes *************************************/
 
 const userUpdateNotes = async (req, res) => {
     try {
       const { id } = req.params;
-      const { title, summary, photo, file, content, image } = req.body;
-  
+      const { title, summary, content } = req.body;
+
+ 
       const notesFind = await noteSchema.findById(id);
   
       if (notesFind) {
         await noteSchema.findByIdAndUpdate(id, {
           title,
           summary,
-          photo,
-          file,
+    
           content,
-          image,
+          
         });
   
        
@@ -175,4 +192,4 @@ const userUntagNote = async (req, res) => {
     }
   };
 
-export { userAddNotes, userGetNotes, handleSearch ,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote};
+export { userAddNotes, userGetNotes, handleSearch ,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote,userGetEditNotes};
