@@ -7,7 +7,7 @@ const userAddNotes= async (req,res)=>{
     try {
         
         
-       const {title,summary,photo,file,content,userId}=req.body
+       const {title,summary,photo,file,content,image,userId}=req.body
        const user= await userSchema.findById(userId)
        if(user){
         const newNote = await noteSchema.create({
@@ -16,6 +16,7 @@ const userAddNotes= async (req,res)=>{
            photo,
            file,
            content,
+           image,
            author:userId
           });
          
