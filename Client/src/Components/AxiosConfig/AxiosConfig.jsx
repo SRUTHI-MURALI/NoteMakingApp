@@ -35,9 +35,7 @@ api.interceptors.request.use(
 //   return axios.post(`${Base_Url}/student/googlelogin`, { id_token });
 // };
 
-// export const studentLogin = (email: string, password: string) => {
-//   return axios.post(`${Base_Url}/student/login`, { email, password });
-// };
+
 
 
 
@@ -90,6 +88,10 @@ export const VerifyOtp=(verificationCode)=>{
     console.log('verify',verificationCode);
     return axios.post(`${Base_Url}/user/verifyOtp`,{verificationCode})
 }
+
+export const userLogin = (email, password) => {
+  return axios.post(`${Base_Url}/user/login`, { email, password });
+};
 
 
 

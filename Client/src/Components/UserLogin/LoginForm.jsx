@@ -16,9 +16,8 @@ import { useState, useEffect } from "react";
 //   CredentialResponse,
 // } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
-import { login } from "../../ReduxComponents/StudentSlice";
-
-import { googleLogin, studentLogin } from "../AxiosConfigStudents/AxiosConfig";
+import { login } from "../Redux/UserSlice";
+import { userLogin } from "../AxiosConfig/AxiosConfig";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
@@ -65,14 +64,14 @@ function LoginForm() {
     }
 
     try {
-      const response = await studentLogin(trimmedEmail, trimmedPassword);
+      const response = await userLogin(trimmedEmail, trimmedPassword);
 
-      const studentData = response.data;
+      const userData = response.data;
 
-      localStorage.setItem("studentData", JSON.stringify(studentData));
-      dispatch(login(studentData));
+      localStorage.setItem("userData", JSON.stringify(userData));
+      dispatch(login(userData));
       toast.success("successfully logged in");
-      navigate("/studentlandingpage");
+      navigate("/homePage");
     } catch (error) {
       // Display the error message from the response
       if (
@@ -88,8 +87,8 @@ function LoginForm() {
   };
 
   useEffect(() => {
-    const studentData = localStorage.getItem("studentData");
-    const parseData = studentData ? JSON.parse(studentData) : null;
+    const userData = localStorage.getItem("userData");
+    const parseData = userData ? JSON.parse(userData) : null;
     if (parseData) {
       navigate("/homePage");
     }
@@ -104,7 +103,7 @@ function LoginForm() {
             position="top-center"
             autoClose={3000}
           ></ToastContainer>
-          <Row>
+          <Row className="m-3">
             
             <Col xs={12} md={12}>
               <h1 style={{ textAlign: "center" }} className="mt-5">
@@ -162,14 +161,14 @@ function LoginForm() {
                 <Col>
                   <h6 className="mt-3 ">
                     {" "}
-                    <Link to="/forgotpassword">Forgot Password</Link>
+                    <Link to="">Forgot Password</Link>
                   </h6>
                 </Col>
                 <Col>
                   <h6 className="mt-3 ">
                     {" "}
                     If you are a new user?{" "}
-                    <Link to="/studentregister">Register</Link>
+                    <Link to="/">Register</Link>
                   </h6>
                 </Col>
               </Row>

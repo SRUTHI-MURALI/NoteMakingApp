@@ -1,29 +1,27 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface StudentState {
-  student: string;
-}
 
-const initialState: StudentState = {
-  student: "",
+
+const initialState = {
+  user: "",
 };
 
-const studentSlice = createSlice({
-  name: "student",
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<string>) => {
-      state.student = action.payload;
+    login: (state, action) => {
+      state.user = action.payload;
     },
     logout: (state) => {
-      state.student = "";
-      localStorage.removeItem("studentData");
+      state.user = "";
+      localStorage.removeItem("userData");
     },
   },
 });
 
-export const { login, logout } = studentSlice.actions;
-export const selectStudent = (state: { student: StudentState }) =>
-  state.student.student;
+export const { login, logout } = userSlice.actions;
+export const selectStudent = (state) =>
+  state.user.user;
 
-export default studentSlice.reducer;
+export default userSlice.reducer;

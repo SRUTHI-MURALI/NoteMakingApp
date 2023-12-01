@@ -1,14 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import { configureStore } from "@reduxjs/toolkit";
 
-import StudentSlice from "../ReduxComponents/StudentSlice";
-import TutorSlice from "../ReduxComponents/TutorSlice";
-import AdminSlice from "../ReduxComponents/AdminSlice";
+import UserSlice from "../Redux/UserSlice";
+
 
 export default configureStore({
   reducer: {
-    student: StudentSlice,
-    tutor: TutorSlice,
-    admin:AdminSlice,
+    user: UserSlice,
+    
   },
 });
