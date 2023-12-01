@@ -23,52 +23,6 @@ api.interceptors.request.use(
   }
 );
 
-
-
-
-
-
-
-// export const googleLogin = (id_token: any) => {
-//   console.log(id_token,'axios');
-  
-//   return axios.post(`${Base_Url}/student/googlelogin`, { id_token });
-// };
-
-
-
-
-
-
-
-// export const getStudentProfile = (id: string) => {
-//   return api.get(`/getstudentprofile/${id}`);
-// };
-
-// export const getStudentEditProfile = (
-//   id: string,
-//   name: string,
-//   phone: string,
-//   email: string,
-//   password: string,
-//   gender: string,
-//   photo: string,
-//   age: string,
-//   country: string
-// ) => {
-//   console.log(photo, "photo");
-//   return api.put(`/studenteditedprofile/${id}`, {
-//     name,
-//     phone,
-//     email,
-//     password,
-//     gender,
-//     photo,
-//     age,
-//     country,
-//   });
-// };
-
 export const SendOtp = (
   name,
   email,

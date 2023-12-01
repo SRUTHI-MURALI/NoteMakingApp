@@ -25,7 +25,6 @@ function EditNote({ noteId }) {
     try {
       const getData = async (id) => {
         const res = await getEditData(id);
-        console.log(res.data,'lll');
         res.data.notesFind.map((item) => {
           setTitle(item?.title);
           setSummary(item?.summary || null);
@@ -100,10 +99,10 @@ function EditNote({ noteId }) {
       <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
       <Row className="justify-content-center align-items-center ">
   <Col md={12} className="justify-content-center align-items-center text-center">
-    <h1>Add a new note here </h1>
+    <h1>Edit Your note here </h1>
   </Col>
         <Col md={8}>
-          <form onSubmit={createNewPost}style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
+          <form onSubmit={createNewPost} style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
             <div className="mb-3">
               <label htmlFor="title" className="form-label">
                 Title

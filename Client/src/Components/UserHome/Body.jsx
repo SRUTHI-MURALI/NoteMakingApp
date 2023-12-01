@@ -14,7 +14,7 @@ import {MdOutlineStarOutline} from "react-icons/md"
 import { MdOutlineStarPurple500} from 'react-icons/md'
 import {RxCross2} from 'react-icons/rx'
 import {FaEdit} from 'react-icons/fa'
-import EditNotes from "../../Pages/EditNotes";
+
 
 function Body() {
  
@@ -83,6 +83,7 @@ function Body() {
   useEffect(()=>{
     try {
       setAllNotes(searchedNote)
+      console.log(allNotes,'ghhjk');
     } catch (error) {
       toast.error("Error fetching notes");
     }
@@ -135,10 +136,10 @@ function Body() {
           {allNotes
             ? currentTableData.map((notes) => (
                 <React.Fragment key={notes._id}>
-                  <Col xs={3} className="mt-3">
+                  <Col xs={12} sm={6} md={4} className="mt-3 ">
                     <Link
                       style={{ textDecoration: "none" }}
-                      to={`/noteDetails/${notes?._id}`}
+                     
                     >
                       <div style={{ width: "15rem", height: "16rem" }}>
                         <Card.Img
@@ -149,17 +150,23 @@ function Body() {
                       </div>
                     </Link>
                   </Col>
-                  <Col xs={1} className="mt-5">
+                  <Col xs={12} sm={6} md={5} className="mt-5">
+                    
                     <h3 style={{ marginBottom: "10px", fontWeight: "bold" }}>
                       {notes?.title}
                     </h3>
-                    <p style={{ marginBottom: "5px" }}>{notes?.summary}</p>
                     <p style={{ color: "gray" }}>
                       {formatDate(notes?.createdAt)}
                     </p>
+                    <p style={{ marginBottom: "5px" }}>{notes?.summary}</p>
+                    <p
+                    style={{ marginBottom: "5px" }}
+                    dangerouslySetInnerHTML={{ __html: notes?.content }}
+                  ></p>
+                    
                   </Col>
-                  <Col xs={2} className="mt-2">
-                  <Button variant="none" onClick={()=>handleEdit(notes?._id)} > <FaEdit/></Button>
+                  <Col xs={12} sm={6} md={3} className="mt-3">
+                   <Button variant="none" onClick={()=>handleEdit(notes?._id)} > <FaEdit/></Button>
                     {notes?.tagged ? (
                       <Button variant="none" onClick={()=>handleUnTag(notes?._id)} > <MdOutlineStarPurple500/></Button>
                     ):(
@@ -167,7 +174,8 @@ function Body() {
                     )}
               
               <Button variant="none" onClick={()=>handleDelete(notes?._id)} > <RxCross2/></Button>
-                </Col>
+                   </Col>
+                 
 
                 </React.Fragment>
               ))

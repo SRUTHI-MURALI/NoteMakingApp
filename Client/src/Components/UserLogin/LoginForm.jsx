@@ -91,6 +91,9 @@ function LoginForm() {
     const parseData = userData ? JSON.parse(userData) : null;
     if (parseData) {
       navigate("/homePage");
+    }else{
+      navigate("/login");
+
     }
   }, [navigate]);
 

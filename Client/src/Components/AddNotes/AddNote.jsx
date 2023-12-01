@@ -86,14 +86,17 @@ function AddNote() {
   }
 
   return (
-    <Container className="mt-5">
+    <Container style={{marginTop:'6rem'}}>
        <ToastContainer
                 position="top-center"
                 autoClose={3000}
               ></ToastContainer>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center align-items-center ">
+  <Col md={12} className="justify-content-center align-items-center text-center">
+    <h1>Add a new note here </h1>
+  </Col>
         <Col md={8}>
-          <form onSubmit={createNewPost}>
+          <form onSubmit={createNewPost} style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px' }}>
             <div className="mb-3">
               <label htmlFor="title" className="form-label">
                 Title
@@ -156,6 +159,7 @@ function AddNote() {
               <input
                 type="file"
                 id="file"
+                className="form-control"
                 onChange={(e) => {
                   const inputElement = e.target;
                   if (inputElement && inputElement.files) {
