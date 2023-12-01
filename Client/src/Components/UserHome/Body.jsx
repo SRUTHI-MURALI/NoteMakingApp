@@ -5,11 +5,14 @@ import "./Home.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getNotes } from "../AxiosConfig/AxiosConfig";
+import { deleteNote, getNotes, tagNote, untagNote } from "../AxiosConfig/AxiosConfig";
 import { Image_Url } from "../../../Config/Config";
 import ReactPaginate from "react-paginate";
 import { FaBackward } from "react-icons/fa";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
+import {MdOutlineStarOutline} from "react-icons/md"
+import { MdOutlineStarPurple500} from 'react-icons/md'
+import {RxCross2} from 'react-icons/rx'
 
 function Body() {
  
@@ -25,6 +28,34 @@ function Body() {
     e.preventDefault();
     navigate("/addNotes");
   };
+
+  const handleTag= async(id)=>{
+    try {
+      await tagNote(id)
+      window.location.reload()
+    } catch (error) {
+      toast.error("Error tagging notes");
+    }
+  }
+
+  const handleUnTag= async(id)=>{
+    try {
+      await untagNote(id)
+      window.location.reload()
+    } catch (error) {
+      toast.error("Error tagging notes");
+    }
+  }
+
+
+  const handleDelete= async (id)=>{
+    try {
+      await deleteNote(id)
+      window.location.reload()
+    } catch (error) {
+      toast.error("Error deleting notes");
+    }
+  }
 
   useEffect(() => {
     try {
@@ -108,7 +139,7 @@ function Body() {
                       </div>
                     </Link>
                   </Col>
-                  <Col xs={3} className="mt-5">
+                  <Col xs={1} className="mt-5">
                     <h3 style={{ marginBottom: "10px", fontWeight: "bold" }}>
                       {notes?.title}
                     </h3>
@@ -117,6 +148,16 @@ function Body() {
                       {formatDate(notes?.createdAt)}
                     </p>
                   </Col>
+                  <Col xs={2} className="mt-2">
+                    {notes?.tagged ? (
+                      <Button variant="none" onClick={()=>handleUnTag(notes?._id)} > <MdOutlineStarPurple500/></Button>
+                    ):(
+                      <Button variant="none" onClick={()=>handleTag(notes?._id)} > <MdOutlineStarOutline/></Button>
+                    )}
+              
+              <Button variant="none" onClick={()=>handleDelete(notes?._id)} > <RxCross2/></Button>
+                </Col>
+
                 </React.Fragment>
               ))
             : null}

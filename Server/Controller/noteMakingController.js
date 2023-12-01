@@ -53,10 +53,55 @@ const userGetNotes = async (req, res) => {
 
 /**************************** User Update Notes *************************************/
 
-
+const userUpdateNotes = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { title, summary, photo, file, content, image } = req.body;
+  
+      const notesFind = await noteSchema.findById(id);
+  
+      if (notesFind) {
+        await noteSchema.findByIdAndUpdate(id, {
+          title,
+          summary,
+          photo,
+          file,
+          content,
+          image,
+        });
+  
+       
+        const updatedNote = await noteSchema.findById(id);
+  
+        res.status(200).json({ updatedNote });
+      } else {
+        res.status(404).json({ message: "Note not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  
 
 /**************************** User Delete Notes *************************************/
+const userDeleteNotes = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const notesFind = await noteSchema.find({ _id: id });
+  
+      if (notesFind) {
+        await noteSchema.findByIdAndDelete(id)
 
+        res.status(200).json("note deleted successfully");
+      } else {
+        res.status(500).json({ message: "no notes to display" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
 
 /**************************** User Search  *************************************/
 
@@ -73,4 +118,61 @@ const handleSearch = async (req, res, next) => {
   }
 };
 
-export { userAddNotes, userGetNotes, handleSearch };
+/**************************** User tag Notes *************************************/
+
+const usertagNote = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const notesFind = await noteSchema.findById(id);
+     
+  
+      if (notesFind) {
+        const updatedNote = await noteSchema.findByIdAndUpdate(
+          id,
+          { tagged: true },
+          { new: true } 
+        );
+ 
+        res.status(200).json({ updatedNote });
+      } else {
+        res.status(404).json({ message: "Note not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  
+
+  
+/**************************** User Untag Notes *************************************/
+
+const userUntagNote = async (req, res) => {
+    try {
+      const { id } = req.params;
+    
+      const notesFind = await noteSchema.findById(id);
+  
+      if (notesFind) {
+        await noteSchema.findByIdAndUpdate(id, {
+            tagged:false
+        },{
+            new:true
+        }
+        );
+  
+       
+        const updatedNote = await noteSchema.findById(id);
+  
+        res.status(200).json({ updatedNote });
+      } else {
+        res.status(404).json({ message: "Note not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+
+export { userAddNotes, userGetNotes, handleSearch ,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote};

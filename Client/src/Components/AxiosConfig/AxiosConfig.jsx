@@ -101,6 +101,18 @@ export const getNotes= (id)=>{
   return api.get(`/getNotes/${id}`)
 }
 
+export const tagNote= (id)=>{
+  return api.put(`/tagNote/${id}`)
+}
+
+export const untagNote= (id)=>{
+  return api.put(`/untagNote/${id}`)
+}
+
+export const deleteNote= (id)=>{
+  return api.delete(`/deleteNote/${id}`)
+}
+
 
 
 export default api;

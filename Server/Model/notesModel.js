@@ -29,7 +29,17 @@ const noteSchema = new Schema(
          type: Schema.Types.ObjectId,
          ref: "user"
          },
+         tagged:{
+          type: Boolean,
+          default:false,
+          required: true
+        },
+        isActive:{
+          type:Boolean,
+          default:true
+        }
   },
+  
   {
     timestamps: true,
   }
