@@ -9,6 +9,7 @@ import './Register.css'
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {SendOtp } from "../AxiosConfig/AxiosConfig";
 
 
 function RegisterForm() {
@@ -71,23 +72,23 @@ function RegisterForm() {
     }
 
     try {
-    //   await studentSendOtp(
-    //     trimmedName,
-    //     trimmedEmail,
-    //     trimmedPhone,
-    //     trimmedPassword
-    //   );
+      await SendOtp(
+        trimmedName,
+        trimmedEmail,
+        trimmedPhone,
+        trimmedPassword
+      );
 
-    //   handleNavigation(trimmedEmail);
+      handleNavigation(trimmedEmail);
     } catch (error) {
       toast.error("Registration error");
       return;
     }
   };
 
-//   const handleNavigation = (email) => {
-//     navigate(`/studentverifyOtp/${email}`);
-//   };
+  const handleNavigation = (email) => {
+    navigate(`/verifyOtp/${email}`);
+  };
 
   return (
     <Container className="mt-5">
@@ -154,9 +155,9 @@ function RegisterForm() {
                 </Button>
               </div>
             </Form>
-            <h6 className="mt-5" style={{ textAlign: "right" }}>
+            {/* <h6 className="mt-5" style={{ textAlign: "right" }}>
               Have you already registered? <Link to="/login">Login</Link>
-            </h6>
+            </h6> */}
           </Col>
         </Row>
       </Card>

@@ -1,4 +1,5 @@
 const verifyOtp = (verificationCode, otp, res) => {
+ 
     try {
       if (verificationCode == otp) {
         return true;
