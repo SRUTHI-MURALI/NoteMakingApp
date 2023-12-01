@@ -1,20 +1,19 @@
-import userSchema from '../Model/userModel.js'
+import userSchema from "../Model/userModel.js";
 import bcrypt from "bcrypt";
 import generateToken from "../TokenGenerator/generateToken.js";
-import generateOtp from '../OtpGenerator/generateOtp.js'
-import verifyOtp from '../OtpGenerator/verifyOtp.js'
+import generateOtp from "../OtpGenerator/generateOtp.js";
+import verifyOtp from "../OtpGenerator/verifyOtp.js";
 
 let globalData = {};
 /**************************** User Register Send Otp *************************************/
 
 const userRegisterSendOtp = async (req, res) => {
-  
   try {
     const { name, email, phone, password } = req.body;
-console.log(req.body);
+    console.log(req.body);
     const emailfind = await userSchema.findOne({ email });
-   
-    if (emailfind ) {
+
+    if (emailfind) {
       res.status(400).json(" email already existing");
     } else {
       const message = "Your OTP for email verification";
@@ -46,11 +45,9 @@ console.log(req.body);
   }
 };
 
-
 /**************************** User Register Verify Otp *************************************/
 
 const userRegisterVerifyOtp = async (req, res) => {
-  
   try {
     const { verificationCode } = req.body;
 
@@ -109,4 +106,4 @@ const userLogin = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-  export {userRegisterSendOtp,userRegisterVerifyOtp,userLogin}
+export { userRegisterSendOtp, userRegisterVerifyOtp, userLogin };

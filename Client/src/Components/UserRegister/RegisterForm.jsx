@@ -91,8 +91,8 @@ function RegisterForm() {
   };
 
   return (
-    <Container className="mt-5">
-      <Card className="regCard ">
+    <Container className="mt-5"style={{width:'50rem'}}>
+      <Card style={{backgroundColor:" rgb(139, 179, 198)"}}>
         <ToastContainer position="top-center"></ToastContainer>
         <Row className="m-3">
           
@@ -102,7 +102,7 @@ function RegisterForm() {
             </h1>
             <Form onSubmit={handleSubmit} className="mt-2 ">
               <Form.Group className="mb-3 mt-3" controlId="formGridAddress1">
-                <Form.Label>Name of Student</Form.Label>
+                <Form.Label>Name of User</Form.Label>
                 <Form.Control
                   placeholder="Angelina"
                   value={userName}

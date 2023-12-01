@@ -24,7 +24,7 @@ const SearchBar = ({setSearchedNote} ) => {
     <div  >
       <Form onSubmit={handleSearch}>
         <Row>
-          <Col xs="auto">
+          <Col xs={6}>
             <Form.Control
               type="text"
               placeholder="Search"
@@ -32,7 +32,7 @@ const SearchBar = ({setSearchedNote} ) => {
               className="mr-sm-2"
             />
           </Col>
-          <Col xs="auto">
+          <Col xs={3}>
             <Button type="submit"  variant="info" className='add-button'>Search</Button>
           </Col>
         </Row>

@@ -58,7 +58,13 @@ function TagNotes() {
     <>
     <Container className="body-class ">
       <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
-        <h1></h1>
+      <Col
+          md={12}
+          className="d-flex justify-content-center align-items-center text-center "
+         style={{textDecoration:'underline'}}
+        >
+          <h1>See the tagged Notes</h1>
+        </Col>
      
       <Row>
         {allNotes

@@ -5,19 +5,23 @@ import "./Home.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { deleteNote, getNotes, tagNote, untagNote } from "../AxiosConfig/AxiosConfig";
+import {
+  deleteNote,
+  getNotes,
+  tagNote,
+  untagNote,
+} from "../AxiosConfig/AxiosConfig";
 import { Image_Url } from "../../../Config/Config";
 import ReactPaginate from "react-paginate";
 import { FaBackward } from "react-icons/fa";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
-import {MdOutlineStarOutline} from "react-icons/md"
-import { MdOutlineStarPurple500} from 'react-icons/md'
-import { MdDelete} from 'react-icons/md'
-import {FaEdit} from 'react-icons/fa'
-
+import { MdOutlineStarOutline } from "react-icons/md";
+import { MdOutlineStarPurple500 } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import empty from "../../assets/no data.png"
 
 function Body() {
- 
   const [allNotes, setAllNotes] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchedNote, setSearchedNote] = useState([]);
@@ -31,41 +35,40 @@ function Body() {
     navigate("/addNotes");
   };
 
-  const handleTag= async(id)=>{
+  const handleTag = async (id) => {
     try {
-      await tagNote(id)
-      window.location.reload()
+      await tagNote(id);
+      window.location.reload();
     } catch (error) {
       toast.error("Error tagging notes");
     }
-  }
+  };
 
-  const handleUnTag= async(id)=>{
+  const handleUnTag = async (id) => {
     try {
-      await untagNote(id)
-      window.location.reload()
+      await untagNote(id);
+      window.location.reload();
     } catch (error) {
       toast.error("Error tagging notes");
     }
-  }
+  };
 
-  const handleEdit= async(id)=>{
+  const handleEdit = async (id) => {
     try {
-     navigate(`/editNote/${id}`)
-      
+      navigate(`/editNote/${id}`);
     } catch (error) {
       toast.error("Error editing notes");
     }
-  }
+  };
 
-  const handleDelete= async (id)=>{
+  const handleDelete = async (id) => {
     try {
-      await deleteNote(id)
-      window.location.reload()
+      await deleteNote(id);
+      window.location.reload();
     } catch (error) {
       toast.error("Error deleting notes");
     }
-  }
+  };
 
   useEffect(() => {
     try {
@@ -73,6 +76,7 @@ function Body() {
         const res = await getNotes(userId);
 
         setAllNotes(res.data.notesFind);
+        console.log(allNotes);
       };
       notes(parseData._id);
     } catch (error) {
@@ -80,14 +84,13 @@ function Body() {
     }
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     try {
-      setAllNotes(searchedNote)
-      
+      setAllNotes(searchedNote);
     } catch (error) {
       toast.error("Error fetching notes");
     }
-  },[searchedNote])
+  }, [searchedNote]);
 
   function formatDate(dateString) {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -113,14 +116,18 @@ function Body() {
 
   return (
     <>
-      <Container className="body-class ">
+      <Container className="body-class  ">
+    
+      <>
         <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
 
         <Row className="mb-5">
-          <Col xs={12} md={6} className="float-left ">
+          {currentTableData.length>0 && 
+          <Col xs={8} md={6} className="float-left ">
             <SearchBar setSearchedNote={setSearchedNote} />
           </Col>
-          <Col xs={12} md={6}>
+}
+          <Col xs={4} md={6}>
             <Button
               className="float-end add-button"
               variant="info"
@@ -131,16 +138,13 @@ function Body() {
             </Button>
           </Col>
         </Row>
-        {/* <Container style={{width:'50rem'}}> */}
+        {currentTableData.length>0 &&
         <Row>
           {allNotes
             ? currentTableData.map((notes) => (
                 <React.Fragment key={notes._id}>
                   <Col xs={12} sm={6} md={4} className="mt-3 ">
-                    <Link
-                      style={{ textDecoration: "none" }}
-                     
-                    >
+                    <Link style={{ textDecoration: "none" }}>
                       <div style={{ width: "15rem", height: "16rem" }}>
                         <Card.Img
                           style={{ height: "14rem" }}
@@ -151,7 +155,6 @@ function Body() {
                     </Link>
                   </Col>
                   <Col xs={12} sm={6} md={5} className="mt-5">
-                    
                     <h3 style={{ marginBottom: "10px", fontWeight: "bold" }}>
                       {notes?.title}
                     </h3>
@@ -160,44 +163,83 @@ function Body() {
                     </p>
                     <p style={{ marginBottom: "5px" }}>{notes?.summary}</p>
                     <p
-                    style={{ marginBottom: "5px" }}
-                    dangerouslySetInnerHTML={{ __html: notes?.content }}
-                  ></p>
-                    
+                      style={{ marginBottom: "5px" }}
+                      dangerouslySetInnerHTML={{ __html: notes?.content }}
+                    ></p>
                   </Col>
                   <Col xs={12} sm={6} md={3} className="mt-3">
-                   <Button variant="none" onClick={()=>handleEdit(notes?._id)} > <FaEdit/></Button>
+                    <Button
+                      variant="none"
+                      onClick={() => handleEdit(notes?._id)}
+                    >
+                      {" "}
+                      <FaEdit />
+                    </Button>
                     {notes?.tagged ? (
-                      <Button variant="none" onClick={()=>handleUnTag(notes?._id)} > <MdOutlineStarPurple500/></Button>
-                    ):(
-                      <Button variant="none" onClick={()=>handleTag(notes?._id)} > <MdOutlineStarOutline/></Button>
+                      <Button
+                        variant="none"
+                        onClick={() => handleUnTag(notes?._id)}
+                      >
+                        {" "}
+                        <MdOutlineStarPurple500 />
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="none"
+                        onClick={() => handleTag(notes?._id)}
+                      >
+                        {" "}
+                        <MdOutlineStarOutline />
+                      </Button>
                     )}
-              
-              <Button variant="none" onClick={()=>handleDelete(notes?._id)} > <MdDelete/></Button>
-                   </Col>
-                 
 
+                    <Button
+                      variant="none"
+                      onClick={() => handleDelete(notes?._id)}
+                    >
+                      {" "}
+                      <MdDelete />
+                    </Button>
+                  </Col>
                 </React.Fragment>
               ))
             : null}
         </Row>
+}
+{currentTableData.length>0 && 
         <Container className="d-flex justify-content-center mt-3">
-          <ReactPaginate
-            previousLabel={<FaBackward />}
-            nextLabel={<TbPlayerTrackNextFilled />}
-            breakLabel={"..."}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={3}
-            onPageChange={handlePageClick}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"}
-          />
-        </Container>
+        <ReactPaginate
+          previousLabel={<FaBackward />}
+          nextLabel={<TbPlayerTrackNextFilled />}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={3}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+
+      </Container>
+}
+      </>
+      {allNotes.length === 0 && (
+         <>
+          <Col xs={12} className="d-flex justify-content-center">
+            <img
+              style={{ height: '20rem', width: '25rem' }}
+              src={empty}
+              alt="No Data"
+            />
+          
+          </Col>
+          <p className="d-flex justify-content-center" style={{fontSize:'2rem'}}>No data Found</p>
+         </>
+          
+        )}
       </Container>
     </>
-
   );
 }
 
