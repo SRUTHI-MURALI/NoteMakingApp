@@ -1,6 +1,7 @@
 import express from 'express'
 const userRouter= express.Router()
 
+import { userLoggedIn } from '../MiddleWare/userAuth.js'
 import { userRegisterSendOtp,userRegisterVerifyOtp,userLogin } from '../Controller/loginController.js'
 import {handleSearch, userAddNotes,userGetNotes,userUpdateNotes,userDeleteNotes,usertagNote,userUntagNote,userGetEditNotes} from '../Controller/noteMakingController.js'
 
@@ -13,21 +14,21 @@ userRouter.post("/verifyOtp", userRegisterVerifyOtp);
 userRouter.post("/login", userLogin);
 
 /**************************** User Note Management  *************************************/
-userRouter.post("/addNotes", userAddNotes);
-userRouter.get("/getNotes/:id",userGetNotes)
-userRouter.get("/getEditData/:id",userGetEditNotes)
-userRouter.put("/editNote/:id",userUpdateNotes)
-userRouter.delete("/deleteNote/:id",userDeleteNotes)
+userRouter.post("/addNotes",userLoggedIn, userAddNotes);
+userRouter.get("/getNotes/:id",userLoggedIn,userGetNotes)
+userRouter.get("/getEditData/:id",userLoggedIn,userGetEditNotes)
+userRouter.put("/editNote/:id",userLoggedIn,userUpdateNotes)
+userRouter.delete("/deleteNote/:id",userLoggedIn,userDeleteNotes)
 
 /**************************** User Search   *************************************/
-userRouter.post("/search", handleSearch);
+userRouter.post("/search", userLoggedIn,handleSearch);
 
 /**************************** User Tag note   *************************************/
-userRouter.put("/tagNote/:id", usertagNote);
+userRouter.put("/tagNote/:id",userLoggedIn, usertagNote);
 
 
 /**************************** User UnTag note   *************************************/
-userRouter.put("/untagNote/:id", userUntagNote);
+userRouter.put("/untagNote/:id",userLoggedIn, userUntagNote);
 
 
 
