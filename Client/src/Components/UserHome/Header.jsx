@@ -38,54 +38,57 @@ function Header({ page }) {
         style={{ height: "4rem", width: "10rem" }}
         src={logo}
       />
-       <Navbar.Toggle aria-controls="navbarScroll"  className="custom-navbar-toggle " style={{backgroundColor:'white'}} />
-       <Navbar.Collapse id="navbarScroll">
-       <Nav
-
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          ></Nav>
-      <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1  ">
-        <h1
-          style={{
-            fontSize: "larger",
-            color: "white",
-            fontWeight: "bold",
-            fontStyle: "italic",
-          }}
-          className="ml-auto"
-        >
-          Welcome {parseData?.name}{" "}
-        </h1>
-      </div>
-      {page !== "tags" ? (
-        <div>
-          <Button variant="none" onClick={handleTags}>
-            <img
-              style={{ height: "4rem", width: "4rem" }}
-              src={image}
-              alt="Tag Icon"
-            />
-          </Button>
+      <Navbar.Toggle
+        aria-controls="navbarScroll"
+        className="custom-navbar-toggle "
+        style={{ backgroundColor: "white" }}
+      />
+      <Navbar.Collapse id="navbarScroll">
+        <Nav
+          className="me-auto my-2 my-lg-0"
+          style={{ maxHeight: "100px" }}
+          navbarScroll
+        ></Nav>
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1  ">
+          <h1
+            style={{
+              fontSize: "larger",
+              color: "white",
+              fontWeight: "bold",
+              fontStyle: "italic",
+            }}
+            className="ml-auto"
+          >
+            Welcome {parseData?.name}{" "}
+          </h1>
         </div>
-      ) : (
-        <div>
-          <Button variant="none" onClick={handleHome}>
-            <img
-              style={{ height: "4rem", width: "4rem" }}
-              src={home}
-              alt="Tag Icon"
-            />
-          </Button>
-        </div>
-      )}
+        {page !== "tags" ? (
+          <div>
+            <Button variant="none" onClick={handleTags}>
+              <img
+                style={{ height: "4rem", width: "4rem" }}
+                src={image}
+                alt="Tag Icon"
+              />
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Button variant="none" onClick={handleHome}>
+              <img
+                style={{ height: "4rem", width: "4rem" }}
+                src={home}
+                alt="Tag Icon"
+              />
+            </Button>
+          </div>
+        )}
 
-      <div className="ms-auto">
-        <Link onClick={handleLogout}>
-          <Button className="m-3">Logout</Button>
-        </Link>
-      </div>
+        <div className="ms-auto">
+          <Link onClick={handleLogout}>
+            <Button className="m-3">Logout</Button>
+          </Link>
+        </div>
       </Navbar.Collapse>
     </Navbar>
   );

@@ -1,87 +1,86 @@
-import axios from "axios";
-import { Base_Url } from "../../../Config/Config.jsx";
+  import axios from "axios";
+  import { Base_Url } from "../../../Config/Config.jsx";
 
-const api = axios.create({
-  baseURL: `${Base_Url}/user`,
-});
-
-api.interceptors.request.use(
-  (config) => {
-    const userData = localStorage.getItem("userData");
-
-    
-    const parseData = userData ? JSON.parse(userData) : null;
-    const token = parseData.token;
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-export const SendOtp = (
-  name,
-  email,
-  phone,
-  password
-) => {
-   
-  return axios.post(`${Base_Url}/user/register`, {
-    name,
-    email,
-    phone,
-    password,
+  const api = axios.create({
+    baseURL: `${Base_Url}/user`,
   });
-};
 
-export const VerifyOtp=(verificationCode)=>{
-    console.log('verify',verificationCode);
-    return axios.post(`${Base_Url}/user/verifyOtp`,{verificationCode})
-}
+  api.interceptors.request.use(
+    (config) => {
+      const userData = localStorage.getItem("userData");
 
-export const userLogin = (email, password) => {
-  return axios.post(`${Base_Url}/user/login`, { email, password });
-};
+      const parseData = userData ? JSON.parse(userData) : null;
+      const token = parseData.token;
 
-export const addNotes = (title,summary,content,image,file,userId) => {
-  return api.post(`/addNotes`, {title,summary,content,image,file,userId });
-};
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
-export const getNotes= (id)=>{
-  return api.get(`/getNotes/${id}`)
-}
+  export const SendOtp = (name, email, phone, password) => {
+    return axios.post(`${Base_Url}/user/register`, {
+      name,
+      email,
+      phone,
+      password,
+    });
+  };
 
-export const tagNote= (id)=>{
-  return api.put(`/tagNote/${id}`)
-}
+  export const VerifyOtp = (verificationCode) => {
+    console.log("verify", verificationCode);
+    return axios.post(`${Base_Url}/user/verifyOtp`, { verificationCode });
+  };
 
-export const untagNote= (id)=>{
-  return api.put(`/untagNote/${id}`)
-}
+  export const userLogin = (email, password) => {
+    return axios.post(`${Base_Url}/user/login`, { email, password });
+  };
 
-export const getEditData= (id)=>{
-  return api.get(`/getEditData/${id}`)
-}
+  export const addNotes = (title, summary, content, image, file, userId) => {
+    return api.post(`/addNotes`, {
+      title,
+      summary,
+      content,
+      image,
+      file,
+      userId,
+    });
+  };
 
-export const editNote= (title,summary,content,id)=>{
-  return api.put(`/editNote/${id}`,{
-    title,summary,content
-  })
-}
+  export const getNotes = (id) => {
+    return api.get(`/getNotes/${id}`);
+  };
 
+  export const tagNote = (id) => {
+    return api.put(`/tagNote/${id}`);
+  };
 
+  export const untagNote = (id) => {
+    return api.put(`/untagNote/${id}`);
+  };
 
-export const deleteNote= (id)=>{
-  return api.delete(`/deleteNote/${id}`)
-}
+  export const getEditData = (id) => {
+    return api.get(`/getEditData/${id}`);
+  };
 
-export const getTaggedNotes= (id)=>{
-  return api.get(`/getTaggedNotes/${id}`)
-}
+  export const editNote = (title, summary, content, id) => {
+    return api.put(`/editNote/${id}`, {
+      title,
+      summary,
+      content,
+    });
+  };
 
+  export const deleteNote = (id) => {
+    return api.delete(`/deleteNote/${id}`);
+  };
 
-export default api;
+  export const getTaggedNotes = (id) => {
+    return api.get(`/getTaggedNotes/${id}`);
+  };
+
+  export default api;

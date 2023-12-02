@@ -182,7 +182,7 @@ function AddNote() {
                   }
                 }}
               />
-              <label>Allowed formats: PDF/DOCX</label>
+              <label>Allowed formats: PDF</label>
             </div>
             <div className="text-center">
               <button type="submit" className="btn btn-primary">

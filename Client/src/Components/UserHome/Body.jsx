@@ -19,7 +19,7 @@ import { MdOutlineStarOutline } from "react-icons/md";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import empty from "../../assets/no data.png"
+import empty from "../../assets/no data.png";
 
 function Body() {
   const [allNotes, setAllNotes] = useState([]);
@@ -117,126 +117,132 @@ function Body() {
   return (
     <>
       <Container className="body-class  ">
-    
-      <>
-        <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
+        <>
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+          ></ToastContainer>
 
-        <Row className="mb-5">
-          {currentTableData.length>0 && 
-          <Col xs={8} md={6} className="float-left ">
-            <SearchBar setSearchedNote={setSearchedNote} />
-          </Col>
-}
-          <Col xs={4} md={6}>
-            <Button
-              className="float-end add-button"
-              variant="info"
-              onClick={handleAddNote}
+          <Row className="mb-5">
+            {currentTableData.length > 0 && (
+              <Col xs={8} md={6} className="float-left ">
+                <SearchBar setSearchedNote={setSearchedNote} />
+              </Col>
+            )}
+            <Col xs={4} md={6}>
+              <Button
+                className="float-end add-button"
+                variant="info"
+                onClick={handleAddNote}
+              >
+                {" "}
+                Add a Note{" "}
+              </Button>
+            </Col>
+          </Row>
+          {currentTableData.length > 0 && (
+            <Row>
+              {allNotes
+                ? currentTableData.map((notes) => (
+                    <React.Fragment key={notes._id}>
+                      <Col xs={12} sm={6} md={4} className="mt-3 ">
+                        <Link style={{ textDecoration: "none" }}>
+                          <div style={{ width: "15rem", height: "16rem" }}>
+                            <Card.Img
+                              style={{ height: "14rem" }}
+                              variant="top"
+                              src={`${Image_Url}/${notes?.image}`}
+                            />
+                          </div>
+                        </Link>
+                      </Col>
+                      <Col xs={12} sm={6} md={5} className="mt-5">
+                        <h3
+                          style={{ marginBottom: "10px", fontWeight: "bold" }}
+                        >
+                          {notes?.title}
+                        </h3>
+                        <p style={{ color: "gray" }}>
+                          {formatDate(notes?.createdAt)}
+                        </p>
+                        <p style={{ marginBottom: "5px" }}>{notes?.summary}</p>
+                        <p
+                          style={{ marginBottom: "5px" }}
+                          dangerouslySetInnerHTML={{ __html: notes?.content }}
+                        ></p>
+                      </Col>
+                      <Col xs={12} sm={6} md={3} className="mt-3">
+                        <Button
+                          variant="none"
+                          onClick={() => handleEdit(notes?._id)}
+                        >
+                          {" "}
+                          <FaEdit />
+                        </Button>
+                        {notes?.tagged ? (
+                          <Button
+                            variant="none"
+                            onClick={() => handleUnTag(notes?._id)}
+                          >
+                            {" "}
+                            <MdOutlineStarPurple500 />
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="none"
+                            onClick={() => handleTag(notes?._id)}
+                          >
+                            {" "}
+                            <MdOutlineStarOutline />
+                          </Button>
+                        )}
+
+                        <Button
+                          variant="none"
+                          onClick={() => handleDelete(notes?._id)}
+                        >
+                          {" "}
+                          <MdDelete />
+                        </Button>
+                      </Col>
+                    </React.Fragment>
+                  ))
+                : null}
+            </Row>
+          )}
+          {currentTableData.length > 0 && (
+            <Container className="d-flex justify-content-center mt-3">
+              <ReactPaginate
+                previousLabel={<FaBackward />}
+                nextLabel={<TbPlayerTrackNextFilled />}
+                breakLabel={"..."}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+              />
+            </Container>
+          )}
+        </>
+        {allNotes.length === 0 && (
+          <>
+            <Col xs={12} className="d-flex justify-content-center">
+              <img
+                style={{ height: "20rem", width: "25rem" }}
+                src={empty}
+                alt="No Data"
+              />
+            </Col>
+            <p
+              className="d-flex justify-content-center"
+              style={{ fontSize: "2rem" }}
             >
-              {" "}
-              Add a Note{" "}
-            </Button>
-          </Col>
-        </Row>
-        {currentTableData.length>0 &&
-        <Row>
-          {allNotes
-            ? currentTableData.map((notes) => (
-                <React.Fragment key={notes._id}>
-                  <Col xs={12} sm={6} md={4} className="mt-3 ">
-                    <Link style={{ textDecoration: "none" }}>
-                      <div style={{ width: "15rem", height: "16rem" }}>
-                        <Card.Img
-                          style={{ height: "14rem" }}
-                          variant="top"
-                          src={`${Image_Url}/${notes?.image}`}
-                        />
-                      </div>
-                    </Link>
-                  </Col>
-                  <Col xs={12} sm={6} md={5} className="mt-5">
-                    <h3 style={{ marginBottom: "10px", fontWeight: "bold" }}>
-                      {notes?.title}
-                    </h3>
-                    <p style={{ color: "gray" }}>
-                      {formatDate(notes?.createdAt)}
-                    </p>
-                    <p style={{ marginBottom: "5px" }}>{notes?.summary}</p>
-                    <p
-                      style={{ marginBottom: "5px" }}
-                      dangerouslySetInnerHTML={{ __html: notes?.content }}
-                    ></p>
-                  </Col>
-                  <Col xs={12} sm={6} md={3} className="mt-3">
-                    <Button
-                      variant="none"
-                      onClick={() => handleEdit(notes?._id)}
-                    >
-                      {" "}
-                      <FaEdit />
-                    </Button>
-                    {notes?.tagged ? (
-                      <Button
-                        variant="none"
-                        onClick={() => handleUnTag(notes?._id)}
-                      >
-                        {" "}
-                        <MdOutlineStarPurple500 />
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="none"
-                        onClick={() => handleTag(notes?._id)}
-                      >
-                        {" "}
-                        <MdOutlineStarOutline />
-                      </Button>
-                    )}
-
-                    <Button
-                      variant="none"
-                      onClick={() => handleDelete(notes?._id)}
-                    >
-                      {" "}
-                      <MdDelete />
-                    </Button>
-                  </Col>
-                </React.Fragment>
-              ))
-            : null}
-        </Row>
-}
-{currentTableData.length>0 && 
-        <Container className="d-flex justify-content-center mt-3">
-        <ReactPaginate
-          previousLabel={<FaBackward />}
-          nextLabel={<TbPlayerTrackNextFilled />}
-          breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-        />
-
-      </Container>
-}
-      </>
-      {allNotes.length === 0 && (
-         <>
-          <Col xs={12} className="d-flex justify-content-center">
-            <img
-              style={{ height: '20rem', width: '25rem' }}
-              src={empty}
-              alt="No Data"
-            />
-          
-          </Col>
-          <p className="d-flex justify-content-center" style={{fontSize:'2rem'}}>No data Found</p>
-         </>
-          
+              No data Found
+            </p>
+          </>
         )}
       </Container>
     </>

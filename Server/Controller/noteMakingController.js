@@ -191,7 +191,7 @@ const userTaggedNotesPage = async (req, res) => {
     const { id } = req.params;
 
     const notesFind = await noteSchema.find({ author: id, tagged: true });
-    console.log(notesFind, "kkkk");
+   
     if (notesFind) {
       res.status(200).json({ notesFind });
     } else {
