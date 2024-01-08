@@ -66,11 +66,16 @@ function Body() {
   const handleDelete = async (id) => {
     try {
       await deleteNote(id);
-      window.location.reload();
+      const result=allNotes.filter((note)=>note._id !== id)
+     setAllNotes(result)
     } catch (error) {
       toast.error("Error deleting notes");
     }
   };
+
+  useEffect(()=>{
+    
+  },[allNotes])
 
   useEffect(() => {
     try {

@@ -33,7 +33,7 @@
   };
 
   export const VerifyOtp = (verificationCode) => {
-    console.log("verify", verificationCode);
+   
     return axios.post(`${Base_Url}/user/verifyOtp`, { verificationCode });
   };
 
@@ -41,8 +41,8 @@
     return axios.post(`${Base_Url}/user/login`, { email, password });
   };
 
-  export const addNotes = (title, summary, content, image, file, userId) => {
-    return api.post(`/addNotes`, {
+  export const addNotes = async (title, summary, content, image, file, userId) => {
+   return await api.post(`/addNotes`, {
       title,
       summary,
       content,
@@ -77,8 +77,12 @@
     });
   };
 
-  export const deleteNote = (id) => {
-    return api.delete(`/deleteNote/${id}`);
+  export const deleteNote =async (id) => {
+    try {
+      await api.delete(`/deleteNote/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   export const getTaggedNotes = (id) => {
