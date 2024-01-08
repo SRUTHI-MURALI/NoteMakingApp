@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('tiny'))
 const corsOption = {
-  origin: 'https://note-making-app-rl7z.onrender.com'
+  origin: '*'
 };
 app.use(cors(corsOption));
 
