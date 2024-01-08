@@ -116,7 +116,7 @@ function Body() {
 
   return (
     <>
-      <Container className="body-class  ">
+      <Container className="body-class">
         <>
           <ToastContainer
             position="top-center"

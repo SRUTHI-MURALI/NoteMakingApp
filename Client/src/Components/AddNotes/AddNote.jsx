@@ -81,7 +81,7 @@ function AddNote() {
     const response = await axios.post(`${image_upload_url}`, formData);
 
     setCloudinaryFile(response.data.public_id);
-    console.log(response.data.public_id, "jjjj");
+   
   };
 
   if (redirect) {
