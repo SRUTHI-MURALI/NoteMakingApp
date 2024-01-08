@@ -11,12 +11,13 @@ dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('tiny'))
-const corsOption={
-  origin:'https://note-making-app-rl7z.onrender.com'
-}
+const corsOption = {
+  origin: 'https://note-making-app-rl7z.onrender.com'
+};
 app.use(cors(corsOption));
+
 connectDB();
-const port = process.env.port;
+const PORT = process.env.port;
 
 app.use("/user", userRouter);
 
@@ -24,4 +25,4 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port || 3001);
+app.listen(PORT || 3001);
