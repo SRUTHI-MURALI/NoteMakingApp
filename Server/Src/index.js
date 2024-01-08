@@ -11,7 +11,10 @@ dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('tiny'))
-app.use(cors());
+const corsOption={
+  origin:'https://note-making-app-rl7z.onrender.com/'
+}
+app.use(cors(corsOption));
 connectDB();
 const port = process.env.port;
 

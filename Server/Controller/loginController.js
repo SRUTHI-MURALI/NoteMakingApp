@@ -8,10 +8,12 @@ let globalData = {};
 /**************************** User Register Send Otp *************************************/
 
 const userRegisterSendOtp = async (req, res) => {
+  console.log('haiiiii');
   try {
     const { name, email, phone, password } = req.body;
 
     const emailfind = await userSchema.findOne({ email });
+    console.log(emailfind);
 
     if (emailfind) {
       res.status(400).json(" email already existing");

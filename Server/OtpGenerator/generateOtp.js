@@ -14,6 +14,7 @@ const transporter = nodemailer.createTransport({
 const generateOtp = (userMail, message, subject, res) => {
   const otp = parseInt((Math.random() * 1000000).toString(), 10);
   const globalData = otp;
+  console.log(globalData,"ooo");
 
   // Store the OTP in localStorage with a key
 
