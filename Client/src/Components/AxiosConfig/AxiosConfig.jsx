@@ -23,7 +23,7 @@
   );
 
   export const SendOtp = (name, email, phone, password) => {
-    console.log(Base_Url);
+  
     return axios.post(`${Base_Url}/user/register`, {
       name,
       email,
