@@ -21,12 +21,14 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import empty from "../../assets/no data.png";
 
+
 function Body() {
   const [allNotes, setAllNotes] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchedNote, setSearchedNote] = useState([]);
   const userData = localStorage.getItem("userData");
   const parseData = userData ? JSON.parse(userData) : null;
+
 
   const navigate = useNavigate();
 
@@ -76,6 +78,7 @@ function Body() {
         const res = await getNotes(userId);
 
         setAllNotes(res.data.notesFind);
+       
         console.log(allNotes);
       };
       notes(parseData._id);
@@ -102,12 +105,12 @@ function Body() {
   }
 
   let PageSize = 8;
-  const pageCount = Math.ceil(allNotes.length / PageSize);
+  const pageCount = Math.ceil(allNotes?.length/ PageSize);
 
   const currentTableData = useMemo(() => {
     const firstPage = currentPage * PageSize;
-    const lastPage = Math.min(firstPage + PageSize, allNotes.length);
-    return allNotes.slice(firstPage, lastPage);
+    const lastPage = Math.min(firstPage + PageSize, allNotes?.length);
+    return allNotes?.slice(firstPage, lastPage);
   }, [allNotes, currentPage]);
 
   const handlePageClick = (data) => {
@@ -124,7 +127,7 @@ function Body() {
           ></ToastContainer>
 
           <Row className="mb-5">
-            {currentTableData.length > 0 && (
+            {currentTableData?.length > 0 && (
               <Col xs={8} md={6} className="float-left ">
                 <SearchBar setSearchedNote={setSearchedNote} />
               </Col>
@@ -140,7 +143,7 @@ function Body() {
               </Button>
             </Col>
           </Row>
-          {currentTableData.length > 0 && (
+          {currentTableData?.length > 0 && (
             <Row>
               {allNotes
                 ? currentTableData.map((notes) => (
@@ -210,7 +213,7 @@ function Body() {
                 : null}
             </Row>
           )}
-          {currentTableData.length > 0 && (
+          {currentTableData?.length > 0 && (
             <Container className="d-flex justify-content-center mt-3">
               <ReactPaginate
                 previousLabel={<FaBackward />}
@@ -227,7 +230,7 @@ function Body() {
             </Container>
           )}
         </>
-        {allNotes.length === 0 && (
+        {allNotes?.length === 0 && (
           <>
             <Col xs={12} className="d-flex justify-content-center">
               <img

@@ -52,6 +52,7 @@
   };
 
   export const getNotes = (id) => {
+    
     return api.get(`/getNotes/${id}`);
   };
 

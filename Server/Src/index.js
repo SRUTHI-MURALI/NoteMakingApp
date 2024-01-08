@@ -3,12 +3,15 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "../Connection/connection.js";
 import userRouter from "../Routes/userRouter.js";
+import morgan from 'morgan'
 const app = express();
 
-app.use(cors());
+
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(morgan('tiny'))
+app.use(cors());
 connectDB();
 const port = process.env.port;
 

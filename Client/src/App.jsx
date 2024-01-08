@@ -8,7 +8,7 @@ import Home from "./Pages/Home.jsx";
 import AddNotes from "./Pages/AddNotes.jsx";
 import EditNotes from "./Pages/EditNotes.jsx";
 import TaggedNotes from "./Pages/TaggedNotes.jsx";
-
+console.log(import.meta.env.VITE_Base_Url);
 function App() {
   return (
     <>

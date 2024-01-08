@@ -33,10 +33,12 @@ const userAddNotes = async (req, res) => {
 /**************************** User get Notes *************************************/
 
 const userGetNotes = async (req, res) => {
+  console.log('dddd');
   try {
     const { id } = req.params;
-
+    console.log(req.params);
     const notesFind = await noteSchema.find({ author: id });
+    
 
     if (notesFind) {
       res.status(200).json({ notesFind });
